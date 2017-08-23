@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            String urlString = "http://10.0.0.9:8000/personal/api/login";
+            String urlString = "http://13.210.68.199/personal/api/login";
             InputStream in = null;
             try {
                 URL url = new URL(urlString);
