@@ -1,7 +1,6 @@
 package com.griffith.autoflow;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,7 +20,10 @@ import android.widget.TextView;
 
 import com.griffith.autoflow.constant.Constant;
 import com.griffith.autoflow.fragment.DetailSummaryFragment;
+import com.griffith.autoflow.fragment.FixtureEfficiencyFragment;
 import com.griffith.autoflow.fragment.HomeFragment;
+import com.griffith.autoflow.fragment.LeakAlertFragment;
+import com.griffith.autoflow.fragment.UsageComparisonFragment;
 
 public class UserContentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +34,8 @@ public class UserContentActivity extends AppCompatActivity
 
     private TextView usernameTv, useremailTv;
 
-    private Fragment homeFragment, detailSummaryFragment;
+    private Fragment homeFragment, detailSummaryFragment,
+            usageComparisonFragment, leakAlertFragment, fixtureEfficiencyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +61,16 @@ public class UserContentActivity extends AppCompatActivity
         // display the friend fragment by default
         homeFragment = new HomeFragment();
         detailSummaryFragment = new DetailSummaryFragment();
+        usageComparisonFragment = new UsageComparisonFragment();
+        leakAlertFragment = new LeakAlertFragment();
+        fixtureEfficiencyFragment = new FixtureEfficiencyFragment();
+
+
         displayFrament(homeFragment);
 
         // username and email in the navimenu
-        usernameTv = (TextView)headerView.findViewById(R.id.activity_user_content_header_username_tv);
-        useremailTv = (TextView)headerView.findViewById(R.id.activity_user_content_header_email_tv);
+        usernameTv = (TextView) headerView.findViewById(R.id.activity_user_content_header_username_tv);
+        useremailTv = (TextView) headerView.findViewById(R.id.activity_user_content_header_email_tv);
 
         SharedPreferences sharedPref = getSharedPreferences(Constant.SHARED_PREFERENCE_NAME,
                 Context.MODE_PRIVATE);
@@ -94,11 +102,11 @@ public class UserContentActivity extends AppCompatActivity
         } else if (id == R.id.nav_detailed_summary) {
             displayFrament(detailSummaryFragment);
         } else if (id == R.id.nav_usage_comparison) {
-
+            displayFrament(usageComparisonFragment);
         } else if (id == R.id.nav_fixture_efficiency) {
-
+            displayFrament(fixtureEfficiencyFragment);
         } else if (id == R.id.nav_leak_alert) {
-
+            displayFrament(leakAlertFragment);
         } else if (id == R.id.nav_log_out) {
             // clean login details
             SharedPreferences sharedPref = getSharedPreferences(Constant.SHARED_PREFERENCE_NAME,
@@ -120,7 +128,7 @@ public class UserContentActivity extends AppCompatActivity
         return true;
     }
 
-    private void displayFrament(Fragment fragment){
+    private void displayFrament(Fragment fragment) {
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
@@ -130,8 +138,4 @@ public class UserContentActivity extends AppCompatActivity
             Log.e("UserContentActivity", "Error in creating fragment");
         }
     }
-
-
-
-
 }

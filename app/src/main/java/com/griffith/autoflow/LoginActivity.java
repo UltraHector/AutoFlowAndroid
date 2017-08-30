@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         passworEt = (EditText) findViewById(R.id.activity_login_password_et);
 
         loginButton = (Button) findViewById(R.id.activity_login_btn_signin);
-        loginButton.setOnClickListener(new LoginClickListener());
 
         // redirect to the usercontent activity if the user already logged in
         SharedPreferences sharedPref = getSharedPreferences(Constant.SHARED_PREFERENCE_NAME,
@@ -52,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             Intent myIntent = new Intent(LoginActivity.this, UserContentActivity.class);
             startActivity(myIntent);
             finish();
+        }else{
+            loginButton.setOnClickListener(new LoginClickListener());
         }
     }
 
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            String urlString = "http://13.210.68.199/personal/api/login";
+            String urlString = Constant.SERVER_IP + "/personal/api/login";
             InputStream in = null;
             try {
                 URL url = new URL(urlString);
